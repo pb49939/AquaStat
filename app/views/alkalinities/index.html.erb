@@ -1,0 +1,42 @@
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Alkalinities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dkh</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alkalinities.each do |alkalinity| %>
+      <tr>
+        <td><%= alkalinity.dKH %></td>
+        <td><%= alkalinity.created_at.localtime.strftime('%x')%>, <%= alkalinity.created_at.localtime.strftime('%r')%></td>
+        <td><%= link_to 'Show', alkalinity %></td>
+        <td><%= link_to 'Edit', edit_alkalinity_path(alkalinity) %></td>
+        <td><%= link_to 'Destroy', alkalinity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= line_chart Alkalinity.all.group_by_day(:created_at).count%>
+
+
+
+
+
+
+
+
+<br>
+
+<%= link_to 'New Alkalinity', new_alkalinity_path %>

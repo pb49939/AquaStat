@@ -1,0 +1,22 @@
+<%= form_with(model: alkalinity, local: true) do |form| %>
+  <% if alkalinity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(alkalinity.errors.count, "error") %> prohibited this alkalinity from being saved:</h2>
+
+      <ul>
+      <% alkalinity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :dKH %>
+    <%= form.text_field :dKH %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

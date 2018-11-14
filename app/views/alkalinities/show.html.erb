@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dkh:</strong>
+  <%= @alkalinity.dKH %>
+</p>
+
+<p>
+  <strong>Created At:</strong>
+  <%= @alkalinity.created_at.localtime.strftime('%x')%>, <%= @alkalinity.created_at.localtime.strftime('%r')%>
+</p>
+
+<%= link_to 'Edit', edit_alkalinity_path(@alkalinity) %> |
+<%= link_to 'Back', alkalinities_path %>
