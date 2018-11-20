@@ -27,8 +27,10 @@
 </table>
 
 
+  <%= line_chart @alkalinities.pluck(:created_at, :dKH).map{ |a| [ a[0].localtime, a[1]]}, xtitle: "Created At", ytitle: "dKH" %>
 
-<%= line_chart Alkalinity.all.group_by_day(:created_at).count%>
+  
+
 
 
 
