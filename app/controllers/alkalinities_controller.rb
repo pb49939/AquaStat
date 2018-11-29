@@ -5,6 +5,13 @@ class AlkalinitiesController < ApplicationController
   # GET /alkalinities.json
   def index
     @alkalinities = Alkalinity.all
+
+    
+
+    @labels=Alkalinity.all.pluck(:created_at).map{|a| a.to_s}
+    @data=Alkalinity.all.pluck(:dKH)
+
+
   end
 
   # GET /alkalinities/1

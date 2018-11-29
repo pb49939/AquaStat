@@ -1,5 +1,15 @@
 <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+
+
+
+
+
+
 
 <p id="notice"><%= notice %></p>
 
@@ -26,19 +36,49 @@
   </tbody>
 </table>
 
-
-  <%= line_chart @alkalinities.pluck(:created_at, :dKH).map{ |a| [ a[0].localtime, a[1]]}, xtitle: "Created At", ytitle: "dKH" %>
-
-  
-
-
-
-
-
-
+<canvas id="myChart"></canvas>
 
 
 
 <br>
 
 <%= link_to 'New Alkalinity', new_alkalinity_path %>
+
+<script> 
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: <%= raw @labels%>,
+        datasets: [{
+            label: "Alkalinities",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: <%= @data %>,
+        }]
+    },
+
+    // Configuration options go here
+   options: {
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        quarter: 'MMM YYYY'
+                    }
+                }
+            }], 
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0
+                    
+                }
+            }]
+        }
+   }
+});
+</script>
